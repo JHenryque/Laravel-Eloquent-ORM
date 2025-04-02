@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -10,3 +11,4 @@ Route::get('/teste', function () {
     print_r($products->toArray());
 });
 
+Route::get('/orm', [MainController::class, 'index'])->name('orm');

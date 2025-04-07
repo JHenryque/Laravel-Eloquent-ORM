@@ -32,7 +32,31 @@ class MainController extends Controller
 
         // buscar um produto pelo id
         $products = Product::find(10)->toArray();
-        $this->showData($products);
+
+        // buscar produtos por valor maior ou igual
+        $products = Product::where('price', '>=', 70)->get()->toArray();
+
+        //buscar apenas o primeiro resultado
+        $products = Product::where('price', '>=', 70)->first()->toArray();
+
+        //buscar apenas o primeiro alelmento se ele existir, caso contrario retorna array vazio
+        $products = Product::where('price', '>=', 90)->firstOr(function (){
+            echo 'Não exister';
+            // ou podera fazer um array com retorno []; sera a mesma coisa
+        });
+
+        //$this->showData($products);
+
+        $products = Product::find(10);
+        echo $products->price; // valor db
+        echo '<br>';
+        echo $products->price = 200; // definir numero novo preço apenas no codigo (nao na db"
+        echo '<br>';
+        $products->refrech(); // vaolta a recuperar o preço original da db
+        echo '<br>';
+
+
+
     }
 
     private function showData($product) {

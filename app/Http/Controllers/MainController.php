@@ -47,16 +47,42 @@ class MainController extends Controller
 
         //$this->showData($products);
 
-        $products = Product::find(10);
-        echo $products->price; // valor db
-        echo '<br>';
-        echo $products->price = 200; // definir numero novo preço apenas no codigo (nao na db"
-        echo '<br>';
-        $products->refrech(); // vaolta a recuperar o preço original da db
-        echo '<br>';
+//        $products = Product::find(10);
+//        echo $products->price; // valor db
+//        echo '<br>';
+//        echo $products->price = 200; // definir numero novo preço apenas no codigo (nao na db"
+//        echo '<br>';
+//        $products->refrech(); // vaolta a recuperar o preço original da db
+//        echo '<br>';
 
+        // buscar o nome e um preço é maior ou igual a o valor
+        $products = Product::firstWhere('price', '>=', 90)->first();
+        //echo $products->product_name . ' tem um preço de ' . $products->price . '<br>';
 
+        // buscar um valor, se ele existe a logica vai aparece se nao exister vai aparecer uma message
+//        $products = Product::findOr(910, function (){
+//            echo  "Não foi encrontrado o produto desejado!";
+//        });
+//
+//        if ($products) {
+//            echo $products->product_name . ' tem um preço de ' . $products->price . '<br>';
+//        }
 
+        $total_products = Product::count();
+        $product_max_price = Product::max('price');
+        $product_min_price = Product::min('price');
+        $product_avg_price = Product::avg('price');
+        $product_sun_price = Product::sun('price');
+
+        $result = [
+            'total_products' => $total_products,
+            'product_max_price' => $product_max_price,
+            '$product_min_price' => $product_min_price,
+            '$product_avg_price' => $product_avg_price,
+            'product_sun_price' => $product_sun_price,
+        ];
+
+        $this->showData($result);
     }
 
     private function showData($product) {

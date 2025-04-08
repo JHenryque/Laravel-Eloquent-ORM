@@ -97,26 +97,40 @@ class MainController extends Controller
 //            "price" => 60,
 //        ]);
 
-        Product::insert([
-            [
-                "product_name" => 'produto 1',
-                "price" => 40,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                "product_name" => 'produto 2',
-                "price" => 50,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                "product_name" => 'produto 3',
-                "price" => 60,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-        ]);
+//        Product::insert([
+//            [
+//                "product_name" => 'produto 1',
+//                "price" => 40,
+//                'created_at' => Carbon::now(),
+//                'updated_at' => Carbon::now()
+//            ],
+//            [
+//                "product_name" => 'produto 2',
+//                "price" => 50,
+//                'created_at' => Carbon::now(),
+//                'updated_at' => Carbon::now()
+//            ],
+//            [
+//                "product_name" => 'produto 3',
+//                "price" => 60,
+//                'created_at' => Carbon::now(),
+//                'updated_at' => Carbon::now()
+//            ],
+//        ]);
+
+        //UPDATE
+//        $product = Product::find(32);
+//        $product->product_name = 'Produto alterado';
+//        $product->price = 100;
+//        $product->save();
+
+        Product::where('price', '>=', 10)->update(['price' => 200]);
+
+        // atualizar se existir ou criar
+        Product::updateOrCreate(
+          ['product_name' => 'Batata'],
+          ['price' => 20],
+        );
 
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\TesteModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -68,21 +69,55 @@ class MainController extends Controller
 //            echo $products->product_name . ' tem um preço de ' . $products->price . '<br>';
 //        }
 
-        $total_products = Product::count();
-        $product_max_price = Product::max('price');
-        $product_min_price = Product::min('price');
-        $product_avg_price = Product::avg('price');
-        $product_sun_price = Product::sun('price');
+//        $total_products = Product::count();
+//        $product_max_price = Product::max('price');
+//        $product_min_price = Product::min('price');
+//        $product_avg_price = Product::avg('price');
+//        $product_sun_price = Product::sun('price');
+//
+//        $result = [
+//            'total_products' => $total_products,
+//            'product_max_price' => $product_max_price,
+//            '$product_min_price' => $product_min_price,
+//            '$product_avg_price' => $product_avg_price,
+//            'product_sun_price' => $product_sun_price,
+//        ];
+//
+//        $this->showData($result);
 
-        $result = [
-            'total_products' => $total_products,
-            'product_max_price' => $product_max_price,
-            '$product_min_price' => $product_min_price,
-            '$product_avg_price' => $product_avg_price,
-            'product_sun_price' => $product_sun_price,
-        ];
+        // insirir novo produto na table products DB
+//        $new_product = new Product();
+//        $new_product->product_name = "Jaca mole";
+//        $new_product->price = 50;
+//        $new_product->save();
 
-        $this->showData($result);
+// deu erro Add [product_name] to fillable property to allow mass assignment on [App\Models\Product].
+//        Product::create([
+//            "product_name" => 'Jaca',
+//            "price" => 60,
+//        ]);
+
+        Product::insert([
+            [
+                "product_name" => 'produto 1',
+                "price" => 40,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                "product_name" => 'produto 2',
+                "price" => 50,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                "product_name" => 'produto 3',
+                "price" => 60,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+        ]);
+
     }
 
     private function showData($product) {

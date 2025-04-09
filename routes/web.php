@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Models\Product;
+use App\Http\Controllers\RelacaoContrler;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/','home');
@@ -12,3 +13,5 @@ Route::get('/teste', function () {
 });
 
 Route::get('/orm', [MainController::class, 'index'])->name('orm');
+Route::get('relacao', [RelacaoContrler ::class, 'index'])->name('relacao');
+Route::get('one-to-one', [RelacaoContrler ::class, 'oneToOne'])->name('one-to-one');

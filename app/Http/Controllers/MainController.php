@@ -32,7 +32,7 @@ class MainController extends Controller
         $products = Product::limit(3)->get()->toArray();
 
         // buscar um produto pelo id
-        $products = Product::find(10)->toArray();
+        //$products = Product::find(10)->toArray();
 
         // buscar produtos por valor maior ou igual
         $products = Product::where('price', '>=', 70)->get()->toArray();
@@ -124,14 +124,39 @@ class MainController extends Controller
 //        $product->price = 100;
 //        $product->save();
 
-        Product::where('price', '>=', 10)->update(['price' => 200]);
+//        Product::where('price', '>=', 10)->update(['price' => 200]);
+//
+//        // atualizar se existir ou criar
+//        Product::updateOrCreate(
+//          ['product_name' => 'Batata'],
+//          ['price' => 20],
+//        );
 
-        // atualizar se existir ou criar
-        Product::updateOrCreate(
-          ['product_name' => 'Batata'],
-          ['price' => 20],
-        );
+        // DELETE - hard delete e soft delete
+        //---------------------------------
+        // hard delete
+        //---------------------------------
+        //$product = Product::find(11);
+        //$product->delete();
 
+        // limapar tudos da tabela
+        //Product::truncate();
+
+        //limpa
+//        Product::destroy(1);
+//        Product::destroy(1, 2 ,3);
+//        Product::destroy([4, 5, 6]);
+
+        //Product::where('price', '>=', 90)->delete();
+        //---------------------------------
+        // sof delete
+        //---------------------------------
+//        $products = Product::find(20);
+//        $products->delete();
+
+        // recuperar produto com sof delete
+        $products = Product::withTrashed()->find(20);
+        $products->restore();
     }
 
     private function showData($product) {

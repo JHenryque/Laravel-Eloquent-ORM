@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class RelacaoContrler extends Controller
@@ -65,6 +66,19 @@ class RelacaoContrler extends Controller
             }
             echo "<hr>";
         }
+    }
+
+    public function BelongsTo()
+    {
+        // neste metodo vamos pegar no telefone e descobir q que cliente pertence
+//        $phone1 = Phone::find(4);
+//        $client =  $phone1->client;
+//        echo "Telefone:  " . $phone1->phone_number ."<br>";
+//        echo "Nome do cliente: " . $client->client_name ."<br>";
+        //outra forma é usando o metodo with
+        $phone2 = Phone::with('client')->find(1);
+        echo 'Telefone: '. $phone2->phone_number ."<br>";
+        echo 'Cliente: '. $phone2->client->client_name ."<br>";
     }
 
     private function showData($product) {

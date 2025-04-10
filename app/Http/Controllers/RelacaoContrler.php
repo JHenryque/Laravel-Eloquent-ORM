@@ -38,6 +38,35 @@ class RelacaoContrler extends Controller
         }
     }
 
+    public function oneToMany() {
+        // busca o id e o nome do cliente e todos os telefones dele
+//        $client1 = Client::find(3);
+//        $phones = $client1->phones;
+//        echo "Nome do cliente: " . $client1->client_name ."<br>";
+//        echo "Telefone dp cliente: <br>";
+//        foreach ($phones as $phone) {
+//            echo $phone->phone_number ."<br><hr>";
+//        }
+        // ourto foem e usando o metodo with()
+//        $client2 = Client::with('phones')->find(2);
+//        echo "Nome do cliente: " . $client2->client_name ."<br>";
+//        echo 'Telefones: ';
+//        foreach ($client2->phones as $phone) {
+//            echo $phone->phone_number .", ";
+//        }
+//        echo "<hr>";
+        //vamos buscar todos os clientes e os seus telefone
+        $clients = Client::with('phones')->get();
+        foreach ($clients as $client) {
+            echo "Nome do cliente: " . $client->client_name ."<br>";
+            echo 'Telefones do clientes: ';
+            foreach ($client->phones as $phone) {
+                echo $phone->phone_number .", ";
+            }
+            echo "<hr>";
+        }
+    }
+
     private function showData($product) {
         echo "<pre>";
         print_r($product);

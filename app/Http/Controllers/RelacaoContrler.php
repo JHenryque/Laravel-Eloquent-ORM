@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Phone;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class RelacaoContrler extends Controller
@@ -79,6 +80,27 @@ class RelacaoContrler extends Controller
         $phone2 = Phone::with('client')->find(1);
         echo 'Telefone: '. $phone2->phone_number ."<br>";
         echo 'Cliente: '. $phone2->client->client_name ."<br>";
+    }
+
+    public function ManyToMany() {
+        //buscar um cliente e todos os produtos que ele comprou
+//        $client1 = Client::find(2);
+//        $products = $client1->products;
+//        echo "Cliente: " . $client1->client_name ."<br>";
+//        echo "produtos: " . "<br>";
+//        foreach ($products as $product) {
+//            echo $product->product_name . "<br>";
+//        }
+
+        //buscar um cliente e todos os produtos que ele comprou
+        $product1 = Product::find(2);
+        $clients = $product1->clients;
+        echo "Cliente: " . $product1->product_name ."<br>";
+        echo "produtos: " . "<br>";
+        foreach ($clients as $client) {
+            echo $client->client_name . "<br>";
+        }
+
     }
 
     private function showData($product) {

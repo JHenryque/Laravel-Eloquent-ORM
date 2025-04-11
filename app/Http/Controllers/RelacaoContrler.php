@@ -103,6 +103,41 @@ class RelacaoContrler extends Controller
 
     }
 
+    public function RunningQueries()
+    {
+//        // vamos buscar um cliente e ps seus telefones, mas só queremos os telefones que começa po 8
+//        $client1 = Client::find(1);
+//        $phones = $client1->phones()->where('phone_number', 'like', '8%')->get();
+//        echo "Cliente: " . $client1->client_name ."<br>";
+//        echo "telefones: <br>";
+//        foreach ($phones as $phone) {
+//            echo $phone->phone_number .", ";
+//        }
+
+        // buscar todos os produtos que um cliente comoru, mas os produtos que custam mais de 50
+//        $client2 = Client::find(1);
+//        $products = $client2->products()->where('price', '>', 50)->orderBy('product_name')->get();
+//        echo "Cliente: " . $client2->client_name ."<br>";
+//        echo "Produtos: <br>";
+//        foreach ($products as $product) {
+//            echo $product->product_name ." - " . $product->price ."<br>";
+//        }
+
+        // vao apatecer produtos repetidos. Para evitar isso, podemos usar o metodo distinct() e vamos ordenar os produtos em  ordem alfabetica do nome
+        $client2 = Client::find(1);
+        $products = $client2->products()->where('price', '>', 50)->distinct()->orderBy('product_name')->get();
+        echo "Cliente: " . $client2->client_name ."<br>";
+        echo "Produtos: <br>";
+        foreach ($products as $product) {
+            echo $product->product_name ." - " . $product->price ."<br>";
+        }
+//        dd([
+//            $client1->toArray(),
+//            $phones->toArray()
+//        ]);
+
+    }
+
     private function showData($product) {
         echo "<pre>";
         print_r($product);

@@ -157,6 +157,35 @@ class RelacaoContrler extends Controller
         }
     }
 
+    public function Collections() {
+//        $clients = Client::take(5)->get();
+//        foreach ($clients as $client) {
+//            echo "Nome do cliente: " . $client->client_name ."<br>";
+//        }
+        //APPEND
+        $clients = Client::take(5)->get();
+        $clients->each->append(['client_name_uppercase', 'email_domain']);
+        foreach ($clients as $client) {
+            $client->client_name_uppercase = strtoupper($client->client_name);
+            $client->email_domain = explode('@', $client->email)[1];
+        }
+
+        foreach ($clients as $client) {
+          echo  $client->client_name . ' - ' . $client->client_name_uppercase . ' - ' . $client->email_domain . '<br>';
+        }
+        // CONTAINS
+        $clients = Client::take(5)->get();
+        $result = $clients->contains('client_name', 'Laura Teresa Nunes');
+        var_dump($result);
+
+        //DIFF
+        $client1 = Client::take(5)->get();
+        $client2 = Client::take(3)->get();
+        $result = $client1->diff($client2)->toArray();
+        $this->showData($result);
+
+    }
+
     private function showData($product) {
         echo "<pre>";
         print_r($product);

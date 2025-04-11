@@ -19,3 +19,4 @@ Route::get('one-to-many', [RelacaoContrler ::class, 'oneToMany'])->name('one-to-
 Route::get('belongsTo', [RelacaoContrler ::class, 'BelongsTo'])->name('BelongsTo');
 Route::get('many-to-many', [RelacaoContrler ::class, 'ManyToMany'])->name('HasMany');
 Route::get('running-queries',  [RelacaoContrler ::class, 'RunningQueries'])->name('RunningQueries');
+Route::get('same-results',  [RelacaoContrler ::class, 'SameResults'])->name('SameResults');

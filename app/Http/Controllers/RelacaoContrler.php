@@ -138,6 +138,25 @@ class RelacaoContrler extends Controller
 
     }
 
+    public function SameResults() {
+        //vamos buscar os mesmos resultados, mas sem usar as relaçoes e um cliente e os seus telefones
+//        $client1 = Client::find(1);
+//        $phone = Phone::where('client_id', $client1->id)->get();
+//        echo "Cliente: " . $client1->client_name ."<br>";
+//        echo "Telefone: <br>";
+//        foreach ($phone as $phone) {
+//            echo $phone->phone_number ."<br>";
+//        }
+        // vamos buscar todos os produtos que um cliente comprou
+        $client2 = Client::find(1);
+        $products = Product::join('orders', 'products.id', '=', 'orders.product_id')->where('orders.client_id', '=', $client2->id)->get();
+        echo "Cliente: " . $client2->client_name ."<br>";
+        echo "Produtos: <br>";
+        foreach ($products as $product) {
+            echo $product->product_name ." - " . $product->price ."<br>";
+        }
+    }
+
     private function showData($product) {
         echo "<pre>";
         print_r($product);

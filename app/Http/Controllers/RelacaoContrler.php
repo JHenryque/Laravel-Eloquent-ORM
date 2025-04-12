@@ -199,6 +199,28 @@ class RelacaoContrler extends Controller
 
     }
 
+    public function Serializacao() {
+//        $clients = Client::take(5)->get()->toArray();
+//        $this->showData( $clients);
+//        echo '<hr>';
+//        $clients = Client::take(3)->get()->toJson(JSON_PRETTY_PRINT);
+//        echo '<pre>';
+//        print_r($clients);
+
+//        $client1 = Client::take(10)
+//                            ->get()
+//                            ->setHidden(['id', 'active', 'deleted_at'])
+//                            ->toJson(JSON_PRETTY_PRINT);
+//        $this->showData( $client1);
+
+        $client1 = Client::take(10)
+            ->get()
+            ->setVisible(['id', 'active', 'deleted_at', 'created_at', 'updated_at'])
+            ->toJson(JSON_PRETTY_PRINT);
+        $this->showData( $client1);
+
+    }
+
     private function showData($product) {
         echo "<pre>";
         print_r($product);

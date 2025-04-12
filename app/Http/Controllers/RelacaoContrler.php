@@ -184,6 +184,19 @@ class RelacaoContrler extends Controller
         $result = $client1->diff($client2)->toArray();
         $this->showData($result);
 
+        // INTERSECT
+        $client1 = Client::take(5)->get();
+        $client2 = Client::where('id', '>', 3)->take(5)->get();
+        $result = $client1->intersect($client2)->toArray();
+        $this->showData($result);
+
+        echo '<hr>';
+
+        // MAKEHIDDEN
+        $clients = Client::take(5)->get();
+        $clients->makeHidden(['id', 'active', 'deleted_at']); // ele remove as chaves quando estar declarado, no mentodo dentro dos argumentos de uma array
+        $this->showData( $clients->toArray());
+
     }
 
     private function showData($product) {
